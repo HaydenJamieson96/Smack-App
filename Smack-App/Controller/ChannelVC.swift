@@ -21,7 +21,7 @@ class ChannelVC: UIViewController {
 
    
     @IBAction func loginBtnWasPressed(_ sender: Any) {
-        shouldPerformSegue(withIdentifier: TO_LOGIN, sender: nil)
+        performSegue(withIdentifier: TO_LOGIN, sender: nil)
     }
     
 }
