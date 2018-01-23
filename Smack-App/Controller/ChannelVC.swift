@@ -22,13 +22,23 @@ class ChannelVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(ChannelVC.userDataDidChange(_:)), name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
         tableView.delegate = self
         tableView.dataSource = self
+        SocketService.instance.getChannel { (success) in
+            if success {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         setupUserInfo()
     }
 
-   
+    @IBAction func addChannelPressed(_ sender: Any) {
+        let addChannel = AddChannelVC()
+        addChannel.modalPresentationStyle = .custom
+        present(addChannel, animated: true, completion: nil)
+    }
+    
     @IBAction func loginBtnWasPressed(_ sender: Any) {
         if AuthService.instance.isLoggedIn {
             let profile = ProfileVC()
